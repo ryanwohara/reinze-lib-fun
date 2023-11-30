@@ -1,4 +1,4 @@
-mod calculator;
+mod flashbang;
 
 extern crate common;
 
@@ -16,9 +16,9 @@ pub extern "C" fn exported(
     let _author = to_str_or_default(raw_author);
 
     let result = match command.as_str() {
-        "calc" | "calculate" | "calculator" => calculator::calculate(query.as_str()),
-        "help" => Ok(vec!["calc".to_string()]),
-        "" => Ok("calc"
+        "flashbang" => flashbang::blind(),
+        "help" => Ok(vec!["flashbang".to_string()]),
+        "" => Ok("flashbang"
             .split("\n")
             .map(|s| s.to_string())
             .collect::<Vec<String>>()),
