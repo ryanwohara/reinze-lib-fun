@@ -1,3 +1,4 @@
+mod cameo;
 mod flashbang;
 
 extern crate common;
@@ -16,12 +17,20 @@ pub extern "C" fn exported(
     let _author = to_str_or_default(raw_author);
 
     let result = match command.as_str() {
+        "dra9" => cameo::dra9(),
         "flashbang" => flashbang::blind(),
-        "help" => Ok(vec!["flashbang".to_string()]),
-        "" => Ok("flashbang"
-            .split("\n")
-            .map(|s| s.to_string())
-            .collect::<Vec<String>>()),
+        "zac" => cameo::zac(),
+        "help" => Ok(vec![
+            "dra9".to_string(),
+            "flashbang".to_string(),
+            "zac".to_string(),
+        ]),
+        "" => Ok("dra9
+flashbang
+zac"
+        .split("\n")
+        .map(|s| s.to_string())
+        .collect::<Vec<String>>()),
         _ => Ok(vec![]),
     };
 
