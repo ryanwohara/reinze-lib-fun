@@ -36,6 +36,11 @@ pub extern "C" fn exported(
             "flashbang".to_string(),
             "zac".to_string(),
             "liar".to_string(),
+            "beaver".to_string(),
+            "chinchompa".to_string(),
+            "noob".to_string(),
+            "shrimp".to_string(),
+            "golem".to_string(),
         ]),
         "" => Ok("dra9
             beaver
