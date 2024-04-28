@@ -1,9 +1,9 @@
-mod cameo;
-mod flashbang;
-mod liar;
 mod beaver;
+mod cameo;
 mod chinchompa;
+mod flashbang;
 mod golem;
+mod liar;
 mod noob;
 
 extern crate common;
@@ -43,14 +43,13 @@ pub extern "C" fn exported(
             "golem".to_string(),
         ]),
         "" => Ok("dra9
-            beaver
-            chinchompa
-            flashbang
-            golem
-            liar
-            shrimp
-            zac"
-
+beaver
+chinchompa
+flashbang
+golem
+liar
+shrimp
+zac"
         .split("\n")
         .map(|s| s.to_string())
         .collect::<Vec<String>>()),
