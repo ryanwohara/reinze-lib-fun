@@ -5,3 +5,7 @@ pub fn zac() -> Result<Vec<String>, String> {
 pub fn dra9() -> Result<Vec<String>, String> {
     Ok(vec!["Dra9 > Sababa".to_string()])
 }
+
+pub fn shrimp() -> Result<Vec<String>, String> {
+    Ok(vec!["SHRIMP DID IT!".to_string()])
+}

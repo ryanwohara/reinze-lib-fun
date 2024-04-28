@@ -7,6 +7,7 @@ edition = "2021"
 
 [dependencies]
 common = { git = "https://github.com/ryanwohara/reinze-lib-common.git", branch = "main", package = "reinze-lib-common" }
+rand = "0.8.5"
 
 [lib]
 crate-type = ["dylib"]
