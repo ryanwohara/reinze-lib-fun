@@ -44,7 +44,7 @@ pub extern "C" fn exported(
         ]),
         "" => Ok("dra9
             beaver
-            chimchompa
+            chinchompa
             flashbang
             golem
             liar
