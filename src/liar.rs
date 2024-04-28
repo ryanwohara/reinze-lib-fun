@@ -5,9 +5,9 @@ pub fn liar(query: String, mut author: String) -> Result<Vec<String>, String> {
     let first_token = split.next().unwrap_or_default();
 
     if first_token.len() > 0 {
-       author = first_token.to_owned();
+        author = first_token.to_owned();
     }
 
-    let message = vec!["{author} is a bloody LIAR!".to_string()];
-    Ok(message)
+    let message = format!("{author} is a bloody LIAR!");
+    Ok(vec![message])
 }
