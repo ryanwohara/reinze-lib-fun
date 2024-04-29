@@ -34,23 +34,24 @@ pub extern "C" fn exported(
         "shrimp" => cameo::shrimp(),
         "zac" => cameo::zac(),
         "help" => Ok(vec![
-            "dra9".to_string(),
-            "flashbang".to_string(),
-            "zac".to_string(),
-            "liar".to_string(),
             "beaver".to_string(),
             "chinchompa".to_string(),
+            "dra9".to_string(),
+            "flashbang".to_string(),
+            "golem".to_string(),
+            "liar".to_string(),
             "noob".to_string(),
             "shrimp".to_string(),
-            "golem".to_string(),
+            "zac".to_string(),
         ]),
-        "" => Ok("dra9
-beaver
+        "" => Ok("beaver
+dra9
 chinchompa
 flashbang
 golem
 heron
 liar
+noob
 shrimp
 zac"
         .split("\n")
