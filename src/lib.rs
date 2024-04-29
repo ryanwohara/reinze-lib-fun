@@ -3,6 +3,7 @@ mod cameo;
 mod chinchompa;
 mod flashbang;
 mod golem;
+mod heron;
 mod liar;
 mod noob;
 
@@ -27,6 +28,7 @@ pub extern "C" fn exported(
         "dra9" => cameo::dra9(),
         "flashbang" => flashbang::blind(),
         "golem" => golem::golem(),
+        "heron" => heron::heron(),
         "liar" => liar::liar(query, author),
         "noob" => noob::noob(query, author),
         "shrimp" => cameo::shrimp(),
@@ -47,6 +49,7 @@ beaver
 chinchompa
 flashbang
 golem
+heron
 liar
 shrimp
 zac"
