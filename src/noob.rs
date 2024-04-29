@@ -1,11 +1,13 @@
 use rand::{self, Rng};
 
-pub fn noob(query: String, mut author: String) -> Result<Vec<String>, String> {
+pub fn noob(query: String, author: String) -> Result<Vec<String>, String> {
     let mut split = query.split(" ");
     let first_token = split.next().unwrap_or_default();
 
+    let mut nick = author.split("!").collect::<Vec<&str>>()[0];
+
     if first_token.len() > 0 {
-        author = first_token.to_owned();
+        nick = first_token;
     }
 
     let mut r = rand::thread_rng();
@@ -14,5 +16,5 @@ pub fn noob(query: String, mut author: String) -> Result<Vec<String>, String> {
         _ => "is",
     };
 
-    Ok(vec![format!("{author} {output} a silly noob!")])
+    Ok(vec![format!("{nick} {output} a silly noob!")])
 }
