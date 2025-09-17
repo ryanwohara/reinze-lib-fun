@@ -6,6 +6,7 @@ mod golem;
 mod heron;
 mod liar;
 mod noob;
+mod eightball;
 
 extern crate common;
 
@@ -23,6 +24,7 @@ pub extern "C" fn exported(
     let author = to_str_or_default(raw_author);
 
     let result = match command.as_str() {
+        "8ball" => eightball::shake(),
         "beaver" => beaver::beaver(),
         "chinchompa" => chinchompa::chinchompa(),
         "dra9" => cameo::dra9(),
@@ -44,7 +46,8 @@ pub extern "C" fn exported(
             "shrimp".to_string(),
             "zac".to_string(),
         ]),
-        "" => Ok("beaver
+        "" => Ok("8ball
+beaver
 dra9
 chinchompa
 flashbang
