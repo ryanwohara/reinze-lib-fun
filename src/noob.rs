@@ -10,8 +10,7 @@ pub fn noob(query: String, author: String) -> Result<Vec<String>, String> {
         nick = first_token;
     }
 
-    let mut r = rand::thread_rng();
-    let output = match r.gen_range(0..=1) {
+    let output = match rand::rng().random_range(0..=1) {
         0 => "is not",
         _ => "is",
     };
