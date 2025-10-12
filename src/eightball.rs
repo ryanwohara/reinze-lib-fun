@@ -23,6 +23,7 @@ pub fn shake() -> Result<Vec<String>, String> {
         "Outlook not so good",
         "Very doubtful",
     ];
+
     let result = options[rand::rng().random_range(0..options.len())].to_string();
 
     Ok(vec![result])

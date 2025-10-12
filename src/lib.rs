@@ -1,12 +1,13 @@
 mod beaver;
 mod cameo;
 mod chinchompa;
+mod eightball;
 mod flashbang;
 mod golem;
 mod heron;
+mod horoscope;
 mod liar;
 mod noob;
-mod eightball;
 
 extern crate common;
 
@@ -31,28 +32,36 @@ pub extern "C" fn exported(
         "flashbang" => flashbang::blind(),
         "golem" => golem::golem(),
         "heron" => heron::heron(),
+        "horo" | "horoscope" => horoscope::lookup(query),
         "liar" => liar::liar(query, author),
         "noob" => noob::noob(query, author),
         "shrimp" => cameo::shrimp(),
         "zac" => cameo::zac(),
         "help" => Ok(vec![
-            "beaver".to_string(),
-            "chinchompa".to_string(),
-            "dra9".to_string(),
-            "flashbang".to_string(),
-            "golem".to_string(),
-            "liar".to_string(),
-            "noob".to_string(),
-            "shrimp".to_string(),
-            "zac".to_string(),
-        ]),
+            "8ball",
+            "beaver",
+            "chinchompa",
+            "dra9",
+            "flashbang",
+            "golem",
+            "heron",
+            "horoscope",
+            "liar",
+            "noob",
+            "shrimp",
+            "zac",
+        ]
+        .iter()
+        .map(|s| s.to_string())
+        .collect()),
         "" => Ok("8ball
 beaver
-dra9
 chinchompa
+dra9
 flashbang
 golem
 heron
+horo(scope)?
 liar
 noob
 shrimp
