@@ -67,6 +67,7 @@ horo(scope)?
 liar
 noob
 shrimp
+toucan
 zac"
         .split("\n")
         .map(|s| s.to_string())
