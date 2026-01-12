@@ -8,6 +8,7 @@ mod heron;
 mod horoscope;
 mod liar;
 mod noob;
+mod toucan;
 
 extern crate common;
 
@@ -36,6 +37,7 @@ pub extern "C" fn exported(
         "liar" => liar::liar(query, author),
         "noob" => noob::noob(query, author),
         "shrimp" => cameo::shrimp(),
+        "toucan" => toucan::examine(),
         "zac" => cameo::zac(),
         "help" => Ok(vec![
             "8ball",
