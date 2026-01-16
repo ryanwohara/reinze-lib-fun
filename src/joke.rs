@@ -1,6 +1,5 @@
-use common::{c2, l, p};
+use common::{c2, l};
 use serde::{Deserialize, Serialize};
-use std::fmt::Display;
 
 pub fn lookup() -> Result<Vec<String>, String> {
     let response = match reqwest::blocking::get("https://official-joke-api.appspot.com/random_joke")
