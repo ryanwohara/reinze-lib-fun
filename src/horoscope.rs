@@ -63,7 +63,7 @@ impl Horoscope {
             "scorpio" => Ok(Self::Scorpio),
             "sagittarius" => Ok(Self::Sagittarius),
             "capricorn" => Ok(Self::Capricorn),
-            "aquarius" => Ok(Self::Aquarius),
+            "aqua" | "aquarius" => Ok(Self::Aquarius),
             "pisces" => Ok(Self::Pisces),
             _ => Err(format!("Unknown Horoscope query: {}", query)),
         }
