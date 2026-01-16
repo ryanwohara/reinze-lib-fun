@@ -6,6 +6,7 @@ mod flashbang;
 mod golem;
 mod heron;
 mod horoscope;
+mod joke;
 mod liar;
 mod noob;
 mod toucan;
@@ -34,6 +35,7 @@ pub extern "C" fn exported(
         "golem" => golem::chat(),
         "heron" => heron::chat(),
         "horo" | "horoscope" => horoscope::lookup(query),
+        "joke" => joke::lookup(),
         "liar" => liar::liar(query, author),
         "noob" => noob::noob(query, author),
         "shrimp" => cameo::shrimp(),
@@ -48,9 +50,11 @@ pub extern "C" fn exported(
             "golem",
             "heron",
             "horoscope",
+            "joke",
             "liar",
             "noob",
             "shrimp",
+            "toucan",
             "zac",
         ]
         .iter()
@@ -63,6 +67,7 @@ dra9
 flashbang
 golem
 heron
+joke
 horo(scope)?
 liar
 noob
