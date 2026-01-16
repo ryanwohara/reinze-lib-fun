@@ -60,11 +60,11 @@ impl Horoscope {
             "leo" => Ok(Self::Leo),
             "virgo" => Ok(Self::Virgo),
             "libra" => Ok(Self::Libra),
-            "scorpio" => Ok(Self::Scorpio),
-            "sagittarius" => Ok(Self::Sagittarius),
-            "capricorn" => Ok(Self::Capricorn),
+            "scorp" | "scorpio" => Ok(Self::Scorpio),
+            "sag" | "sagittarius" => Ok(Self::Sagittarius),
+            "cap" | "capricorn" => Ok(Self::Capricorn),
             "aqua" | "aquarius" => Ok(Self::Aquarius),
-            "pisces" => Ok(Self::Pisces),
+            "pisce" | "pisces" => Ok(Self::Pisces),
             _ => Err(format!("Unknown Horoscope query: {}", query)),
         }
     }
