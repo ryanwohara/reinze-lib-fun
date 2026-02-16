@@ -13,9 +13,9 @@ mod toucan;
 
 extern crate common;
 
-use std::ffi::{CStr, CString};
+use common::{PluginContext, to_str_or_default};
+use std::ffi::CString;
 use std::os::raw::c_char;
-use common::PluginContext;
 
 #[unsafe(no_mangle)]
 pub extern "C" fn exported(context: *const PluginContext) -> *mut c_char {
@@ -56,9 +56,9 @@ pub extern "C" fn exported(context: *const PluginContext) -> *mut c_char {
                 "toucan",
                 "zac",
             ]
-                .iter()
-                .map(|s| s.to_string())
-                .collect()),
+            .iter()
+            .map(|s| s.to_string())
+            .collect()),
             "" => Ok("8ball
 beaver
 chinchompa
@@ -73,19 +73,14 @@ noob
 shrimp
 toucan
 zac"
-                .split("\n")
-                .map(|s| s.to_string())
-                .collect::<Vec<String>>()),
+            .split("\n")
+            .map(|s| s.to_string())
+            .collect::<Vec<String>>()),
             _ => Ok(vec![]),
         };
 
-        let output = result.unwrap_or_default();
-
-        CString::new(output.join("\n")).unwrap().into_raw()
+        CString::new(result.unwrap_or_default().join("\n"))
+            .unwrap()
+            .into_raw()
     }
-}
-
-fn to_str_or_default(ptr: *const c_char) -> String {
-    let cstr = unsafe { CStr::from_ptr(ptr) };
-    cstr.to_str().unwrap_or_default().to_owned()
 }
