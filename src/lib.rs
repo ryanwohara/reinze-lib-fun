@@ -11,21 +11,30 @@ mod liar;
 mod noob;
 mod toucan;
 
-extern crate common;
-
+use common::author::Author;
+use common::source::Source;
 use common::{PluginContext, to_str_or_default};
+use log::error;
 use std::ffi::CString;
 use std::os::raw::c_char;
 
 #[unsafe(no_mangle)]
 pub extern "C" fn exported(context: *const PluginContext) -> *mut c_char {
     unsafe {
+        let nil = CString::new("").unwrap().into_raw();
+
+        if context.is_null() {
+            return nil;
+        }
+
         let command = to_str_or_default((*context).cmd);
         let query = to_str_or_default((*context).param);
         let author = to_str_or_default((*context).author);
-        let _color = (*context).color;
+        let color = (*context).color;
 
-        let result = match command.as_str() {
+        let source = Source::create("0", Author::create(author, color), command.as_str(), &query);
+
+        match match command.as_str() {
             "8ball" => eightball::shake(),
             "beaver" => beaver::beaver(),
             "chinchompa" => chinchompa::chinchompa(),
@@ -33,10 +42,10 @@ pub extern "C" fn exported(context: *const PluginContext) -> *mut c_char {
             "flashbang" => flashbang::blind(),
             "golem" => golem::chat(),
             "heron" => heron::chat(),
-            "horo" | "horoscope" => horoscope::lookup(query),
-            "joke" => joke::lookup(),
-            "liar" => liar::liar(query, author),
-            "noob" => noob::noob(query, author),
+            "horo" | "horoscope" => horoscope::lookup(&source),
+            "joke" => joke::lookup(&source),
+            "liar" => liar::liar(&source),
+            "noob" => noob::noob(&source),
             "shrimp" => cameo::shrimp(),
             "toucan" => toucan::examine(),
             "zac" => cameo::zac(),
@@ -77,10 +86,15 @@ zac"
             .map(|s| s.to_string())
             .collect::<Vec<String>>()),
             _ => Ok(vec![]),
-        };
-
-        CString::new(result.unwrap_or_default().join("\n"))
-            .unwrap()
-            .into_raw()
+        } {
+            Ok(output) => match CString::new(output.join("\n")) {
+                Ok(output) => output.into_raw(),
+                Err(_) => nil,
+            },
+            Err(e) => {
+                error!("Command '{}' failed: {:?}", command, e);
+                nil
+            }
+        }
     }
 }

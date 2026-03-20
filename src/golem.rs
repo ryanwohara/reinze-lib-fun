@@ -1,3 +1,3 @@
-pub fn chat() -> Result<Vec<String>, String> {
+pub fn chat() -> anyhow::Result<Vec<String>> {
     Ok(vec!["I'm pretty stoned.".to_string()])
 }

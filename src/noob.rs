@@ -1,14 +1,13 @@
-use rand::{self, Rng};
+use common::source::Source;
+use rand::Rng;
 
-pub fn noob(query: String, author: String) -> Result<Vec<String>, String> {
-    let mut split = query.split(" ");
-    let first_token = split.next().unwrap_or_default();
-
-    let mut nick = author.split("!").collect::<Vec<&str>>()[0];
-
-    if first_token.len() > 0 {
-        nick = first_token;
-    }
+pub fn noob(source: &Source) -> anyhow::Result<Vec<String>> {
+    let first_token = source.query.split_whitespace().next().unwrap_or_default();
+    let nick = if first_token.len() > 0 {
+        first_token
+    } else {
+        &source.author.nick
+    };
 
     let output = match rand::rng().random_range(0..=1) {
         0 => "is not",

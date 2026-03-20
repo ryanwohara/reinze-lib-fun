@@ -1,13 +1,12 @@
-extern crate common;
+use common::source::Source;
 
-pub fn liar(query: String, author: String) -> Result<Vec<String>, String> {
-    let mut split = query.split(" ");
-    let first_token = split.next().unwrap_or_default();
-    let mut nick = author.split("!").collect::<Vec<&str>>()[0];
-    if first_token.len() > 0 {
-        nick = first_token;
-    }
+pub fn liar(source: &Source) -> anyhow::Result<Vec<String>> {
+    let first_token = source.query.split_whitespace().next().unwrap_or_default();
+    let nick = if first_token.len() > 0 {
+        first_token
+    } else {
+        &source.author.nick
+    };
 
-    let message = format!("{nick} is a bloody LIAR!");
-    Ok(vec![message])
+    Ok(vec![format!("{nick} is a bloody LIAR!")])
 }

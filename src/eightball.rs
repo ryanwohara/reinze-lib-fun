@@ -1,6 +1,6 @@
 use rand::Rng;
 
-pub fn shake() -> Result<Vec<String>, String> {
+pub fn shake() -> anyhow::Result<Vec<String>> {
     let options = vec![
         "It is certain",
         "It is decidedly so",

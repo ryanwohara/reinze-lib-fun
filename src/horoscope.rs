@@ -1,34 +1,23 @@
-use common::{c2, l, p};
+use anyhow::Context;
+use common::source::Source;
 use serde::{Deserialize, Serialize};
 use std::fmt::Display;
 
-pub fn lookup(query: String) -> Result<Vec<String>, String> {
-    let sign = match Horoscope::parse(&query) {
-        Ok(sign) => sign,
-        Err(error) => return Ok(vec![error.to_string()]),
-    };
+pub fn lookup(s: &Source) -> anyhow::Result<Vec<String>> {
+    let sign = Horoscope::parse(&s.query)?;
 
-    let response = match reqwest::blocking::get(format!(
+    let response = reqwest::blocking::get(format!(
         "https://horoscope-app-api.vercel.app/api/v1/get-horoscope/daily?day=TODAY&sign={}",
         sign
-    )) {
-        Ok(resp) => match resp.json::<HoroscopeResponse>() {
-            Ok(string) => string,
-            Err(e) => {
-                println!("Error getting text: {}", e);
-                return Ok(vec!["Horoscope API seems broken!".to_string()]);
-            }
-        },
-        Err(e) => {
-            println!("Error making HTTP request: {}", e);
-            return Ok(vec!["Horoscope API is down!".to_string()]);
-        }
-    };
+    ))
+    .context("Horoscope API is down")?
+    .json::<HoroscopeResponse>()
+    .context("Horoscope API returned unexpected response")?;
 
     let output = vec![
-        l("Horoscope"),
-        p(sign.to_string().as_str()),
-        c2(&response.data.horoscope_data),
+        s.l("Horoscope"),
+        s.p(sign.to_string().as_str()),
+        s.c2(&response.data.horoscope_data),
     ]
     .join(" ");
 
@@ -51,7 +40,7 @@ enum Horoscope {
 }
 
 impl Horoscope {
-    fn parse(query: &str) -> Result<Self, String> {
+    fn parse(query: &str) -> anyhow::Result<Self> {
         match query.to_lowercase().as_str() {
             "aries" => Ok(Self::Aries),
             "taurus" => Ok(Self::Taurus),
@@ -65,7 +54,7 @@ impl Horoscope {
             "cap" | "capricorn" => Ok(Self::Capricorn),
             "aqua" | "aquarius" => Ok(Self::Aquarius),
             "pisc" | "pisces" => Ok(Self::Pisces),
-            _ => Err(format!("Unknown Horoscope query: {}", query)),
+            _ => Err(anyhow::anyhow!("Unknown Horoscope query: {}", query)),
         }
     }
 }
