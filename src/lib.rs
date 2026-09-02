@@ -9,6 +9,7 @@ mod horoscope;
 mod joke;
 mod liar;
 mod noob;
+mod phish;
 mod toucan;
 
 use common::author::Author;
@@ -48,6 +49,7 @@ pub extern "C" fn exported(context: *const PluginContext) -> *mut c_char {
             "joke" => joke::lookup(&source),
             "liar" => liar::liar(&source),
             "noob" => noob::noob(&source),
+            "phish" => phish::phish(),
             "shrimp" => cameo::shrimp(),
             "toucan" => toucan::examine(),
             "zac" => cameo::zac(),
@@ -63,6 +65,7 @@ pub extern "C" fn exported(context: *const PluginContext) -> *mut c_char {
                 "joke",
                 "liar",
                 "noob",
+                "phish",
                 "shrimp",
                 "toucan",
                 "zac",
@@ -81,6 +84,7 @@ joke
 horo(scope)?
 liar
 noob
+phish
 shrimp
 toucan
 zac"

@@ -46,6 +46,8 @@ take an argument or fetch from a public API, as noted.
 - `+dra9` — Fixed cameo one-liner: "Dra9 &gt; Sababa".
 - `+shrimp` — Fixed cameo one-liner: "SHRIMP DID IT!".
 - `+zac` — Fixed cameo quote referencing a `!nick` mishap.
+- `+phish` — A fixed Oregon Trail-style death message: "You have died of
+  poison oak!".
 
 ## Building
 
